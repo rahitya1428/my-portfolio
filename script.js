@@ -11,6 +11,7 @@ class PortfolioApp {
         this.setupScrollAnimations();
         this.setupNavbarScrollEffect();
         this.setupTypingAnimation();
+        this.setupSkillBarsAnimation();
     }
 
     // 1. Smooth scrolling between sections
@@ -77,6 +78,7 @@ class PortfolioApp {
         });
 
         // Form submission
+        /*
         contactForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -93,6 +95,40 @@ class PortfolioApp {
                 this.handleFormSubmission(contactForm);
             }
         });
+        */
+         const form = document.querySelector(".contact-form");
+         form.addEventListener("submit", async function(e) {
+            e.preventDefault();
+
+            /*const response = await fetch("http://localhost:3000/send-message", {
+                method: "POST",
+                body: formData
+            });
+            Replacing this code 
+            */
+           const formData = new FormData(form);
+
+            const data = {
+                name: formData.get("name"),
+                email: formData.get("email"),
+                subject: formData.get("subject"),
+                message: formData.get("message")
+            };
+
+            const response = await fetch("http://localhost:3000/send-message", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });     
+
+            const result = await response.text();
+
+            //alert(result);
+            showNotification(result);
+        });
+
     }
 
     validateField(field) {
@@ -319,7 +355,8 @@ class PortfolioApp {
                     } else {
                         skillName.setAttribute('data-percentage', Math.floor(currentPercent));
                         requestAnimationFrame(animateCounter);
-                    }
+                    } 
+
                 };
 
                 // Start animations with stagger
@@ -691,4 +728,62 @@ style.textContent = `
         51%, 100% { opacity: 0; }
     }
 `;
+document.head.appendChild(style);
+
+
+// Function to show notification (can be used for form submission result)
+function showNotification(message) {
+
+    const notification = document.createElement("div");
+
+    notification.innerHTML = `
+        <div class="notification">
+            <span>${message}</span>
+            <button class="close-btn">&times;</button>
+        </div>
+    `;
+
+    document.body.appendChild(notification);
+
+    const box = notification.querySelector(".notification");
+
+    box.style.position = "fixed";
+    box.style.top = "20px";
+    box.style.right = "20px";
+    box.style.background = "#4CAF50";
+    box.style.color = "white";
+    box.style.padding = "15px 20px";
+    box.style.borderRadius = "8px";
+    box.style.boxShadow = "0 5px 15px rgba(0,0,0,0.2)";
+    box.style.zIndex = "1000";
+    box.style.display = "flex";
+    box.style.alignItems = "center";
+    box.style.gap = "15px";
+
+    const closeBtn = box.querySelector(".close-btn");
+
+    closeBtn.style.background = "none";
+    closeBtn.style.border = "none";
+    closeBtn.style.color = "white";
+    closeBtn.style.fontSize = "20px";
+    closeBtn.style.cursor = "pointer";
+
+    closeBtn.onclick = () => notification.remove();
+
+    setTimeout(() => {
+        notification.remove();
+    }, 3000);
+}
+
+// Adding skill bars animation logic
+const skillBars = document.querySelectorAll(".skill-fill");
+
+skillBars.forEach(bar => {
+    const skillValue = bar.getAttribute("data-skill");
+    bar.style.width = skillValue + "%";
+});
+
+
+const style = document.createElement('style');
+style.textContent = ` ... `;
 document.head.appendChild(style);

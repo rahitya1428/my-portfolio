@@ -5,43 +5,92 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Continuous Learning & Exploration</title>
 <link rel="stylesheet" href="style.css">
+<style>
+    p {
+        line-height: 1.4;
+    }
+    h1{
+        color: #360a3b;
+    }
+    h3 {
+        color: #3f0346;
+    }
+    h4 {
+        font-size: 1.2em;
+        margin-top: 20px;
+        color: #3f0346;
+    }
+</style>
 </head>
 
-<body>
+<body class="blog-post">
 
-<header>
-<h1>Continuous Learning & Exploration</h1>
+<header class="blog-content-heading">
+<h1>Quantum Algorithms for Drug Discovery</h1>
 </header>
 
-<section class="blog-content">
+<section class="blog-content" >
+    <h3>Beyond AlphaFold: Architecting the Hybrid Pipeline Between Deep Learning and Variational Quantum Eigensolvers (VQE) for Ab Initio Drug Discovery</h3>
+    <p>AlphaFold changed the world by solving the protein-folding problem. Given an amino acid sequence, it can predict a protein's 3D structure with mind-blowing accuracy. But in the world of computational drug discovery, knowing the shape of the lock (the protein) is only step one.
+    </p>
+    <p>The real challenge is figuring out exactly how a key (a potential drug) interacts with that lock at a subatomic level.
+    </p>
+    <p>
+    When combining AlphaFold and Variational Quantum Eigensolvers (VQE) in a project architecture, the goal is to move past just looking at 3D shapes and start calculating exact chemical binding energies. Here is how that hybrid pipeline actually works under the hood.
+    </p>
 
-<p>
-The technology landscape evolves rapidly, and staying relevant requires 
-continuous learning and curiosity. Every new concept explored, every tool 
-experimented with, and every challenge faced contributes to personal and 
-professional growth.
-</p>
-
-<p>
-Rather than viewing learning as a fixed phase, I see it as an ongoing journey. 
-Experimenting with ideas, building small projects, and exploring unfamiliar 
-concepts help expand understanding and strengthen problem-solving abilities.
-</p>
-
-<p>
-This mindset of exploration encourages adaptability and creativity, allowing 
-developers and technologists to continuously improve their craft while staying 
-open to new possibilities.
-</p>
-
-<p>
-For me, every step in this journey is an opportunity to grow, discover new 
-perspectives, and better understand the evolving world of technology.
-</p>
+    <h4>1. The Classical Computing Bottleneck</h4>
+    <p>
+        Right now, predicting how a drug binds to a protein relies on classical estimation algorithms. To get perfect, real-world accuracy, we need to solve the fundamental quantum physics equations for the interacting molecules.
+    </p>
+    <p>
+        Here is the problem: the math scales exponentially. Every time you add an electron to the simulation, the amount of compute power needed doubles. If you tried to perfectly simulate a small drug like penicillin on a normal computer, it would require a hard drive larger than the observable universe. Classical silicon just hits a wall.
+    </p>
+    <p>
+        Quantum computers bypass this. Because they use qubits instead of standard bits, a small 50-qubit processor can inherently handle $2^{50}$ data states simultaneously. The physics problem is solved. The new challenge is a software engineering one: How do we translate a static .pdb file from AlphaFold into a dynamic quantum circuit?
+    </p>
+    <h4>2. Splitting the Workload (The QM/MM Boundary)</h4>
+    <p>
+        You cannot simulate an entire protein on a quantum computer—it's too big and completely unnecessary. Most of the protein is just a structural scaffold. All the important chemistry happens in a tiny pocket called the "active site."
+    </p>
+    <p>
+        •	The MM Region (Classical): The bulk of the protein is handled by a standard CPU using classical physics (Molecular Mechanics).
+    </p>
+    <p>
+        •	The QM Region (Quantum): You write an algorithmic parser to extract just the active site and the drug molecule. This highly complex, isolated cluster is sent to the quantum processor (Quantum Mechanics).
+    </p>
+    <h4>3. Translating Chemistry into Quantum Code</h4>
+    <p>
+        Once your Python script isolates the active site, you have to translate those atoms into a language the quantum computer understands.
+    </p>
+    <p>
+        1.	Generate the Hamiltonian: First, classical software calculates the fundamental energy matrix (the Hamiltonian) of the molecules.
+    </p>
+    <p>
+        2.	Fermion-to-Qubit Mapping: Electrons are fermions, but quantum computers run on qubits. You have to use mathematical transformations (like the Jordan-Wigner transformation) to map the electron behavior into a string of quantum logic gates (Pauli operators). Think of this as compiling high-level code down to machine language.
+    </p>
+    <h4>4. The VQE Loop: AI and Quantum Working Together</h4>
+    <p>
+        Now we hit the actual Variational Quantum Eigensolver (VQE). VQE is a hybrid algorithm, meaning it uses both a regular CPU and a Quantum Processing Unit (QPU) in a continuous feedback loop:
+    </p>
+    <p>
+        •	Step 1 (The QPU): The quantum computer runs a parameterized circuit (called an ansatz) to simulate the molecular state and measure the energy of the system: $E(\vec{\theta})$. 
+    </p>
+    <p>
+        •	Step 2 (The CPU): The measured energy is sent back to a classical machine learning optimizer.
+    </p>
+    <p>
+        •	Step 3 (The Loop): The classical optimizer tweaks the parameters and sends them back to the quantum computer.
+    </p>
+    <p>
+        They pass the data back and forth until the classical optimizer finds the absolute lowest energy state. That lowest state tells us exactly how strongly the drug binds to the protein.
+    </p>
+    <h4>The Takeaway</h4>
+    <p>Current quantum processors are still noisy (we call this the NISQ era), so real-world pipelines require a lot of software error-correction. But the foundation is here. By feeding AI-predicted protein structures directly into quantum algorithms, we aren't just guessing how drugs work anymore—we are computing their exact chemical reality.</p>
 
 </section>
 
-<a href="index.html">← Back to Portfolio</a>
+<a href="index.html" style="color: #0f3460;">← Back to Portfolio</a>
 
 </body>
 </html>

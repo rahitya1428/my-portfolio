@@ -498,7 +498,7 @@ section {
 }
 
 .skill-name::after {
-  content: attr(data-percentage) '%';
+  content: attr(data-percentage) ;
   color: var(--neon-accent);
   font-weight: 600;
   font-size: 0.85rem;
@@ -1388,17 +1388,39 @@ section {
   .btn {
     padding: 10px 20px;
     font-size: 0.9rem;
+    
   }
 }
 
+
+.blog-post{
+background-color: #b6c79c;
+}
+
+.blog-content-heading {
+  height: 150px;
+  display: flex;
+text-align: center;
+justify-content: center;
+align-items: center;
+margin-bottom: 0%;
+text-shadow: 0 10px 15px rgba(255, 255, 255, 0.5);
+background-color: #8c9972;
+
+}
+
 .blog-content{
-max-width:800px;
+max-width:90%;
 margin:auto;
 padding:40px;
 line-height:1.8;
-font-size:18px;
+font-size:18px; 
+background-color: #ede8da;
+
 }
 
 .blog-content p{
 margin-bottom:20px;
+color: #0f3460;
+
 }
